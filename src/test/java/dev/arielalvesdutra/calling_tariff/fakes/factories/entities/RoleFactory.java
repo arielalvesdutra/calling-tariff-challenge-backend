@@ -8,8 +8,12 @@ import java.util.Set;
 /**
  * Factory to create fake objects for testing.
  */
-public class FakeRoleFactory {
+public class RoleFactory {
 
+    /**
+     *
+     * @return
+     */
     public static Role fakeRole() {
         return new Role()
                 .setId(1L)
@@ -18,13 +22,11 @@ public class FakeRoleFactory {
                 .setDescription("Support Analyst");
     }
 
-    public static Set<Role> fakeRoleSet() {
-        Role role = fakeRole();
-        Set<Role> roles = new HashSet<>();
-        roles.add(role);
-        return roles;
-    }
-
+    /**
+     *
+     * @param role
+     * @return
+     */
     public static Set<Role> fakeRoleSet(Role role) {
         Set<Role> roles = new HashSet<>();
         roles.add(role);

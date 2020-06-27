@@ -2,7 +2,7 @@ package dev.arielalvesdutra.calling_tariff.unit.entities;
 
 import dev.arielalvesdutra.calling_tariff.entities.CallPlan;
 import dev.arielalvesdutra.calling_tariff.entities.User;
-import dev.arielalvesdutra.calling_tariff.fakes.factories.entities.FakeUserFactory;
+import dev.arielalvesdutra.calling_tariff.fakes.factories.entities.UserFactory;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -34,8 +34,8 @@ public class CallPlanTest {
         BigDecimal price = new BigDecimal(31.99);
         boolean isVisible = true;
         OffsetDateTime datetime = OffsetDateTime.now();
-        User user = FakeUserFactory.fakeUser();
-        Set<User> userSet = FakeUserFactory.fakeUserSet(user);
+        User user = UserFactory.fakeUser();
+        Set<User> userSet = UserFactory.fakeUserSet(user);
 
         CallPlan callPlan = new CallPlan()
                 .setId(id)

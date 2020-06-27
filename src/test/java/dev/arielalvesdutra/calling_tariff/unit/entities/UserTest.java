@@ -3,12 +3,13 @@ package dev.arielalvesdutra.calling_tariff.unit.entities;
 import dev.arielalvesdutra.calling_tariff.entities.CallPlan;
 import dev.arielalvesdutra.calling_tariff.entities.Role;
 import dev.arielalvesdutra.calling_tariff.entities.User;
-import dev.arielalvesdutra.calling_tariff.fakes.factories.entities.FakeCallPlanFactory;
-import dev.arielalvesdutra.calling_tariff.fakes.factories.entities.FakeRoleFactory;
+import dev.arielalvesdutra.calling_tariff.fakes.factories.entities.CallPlanFactory;
+import dev.arielalvesdutra.calling_tariff.fakes.factories.entities.RoleFactory;
 import org.junit.Test;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.Size;
 import java.time.OffsetDateTime;
 import java.util.Set;
 import java.util.UUID;
@@ -31,9 +32,9 @@ public class UserTest {
         String password = "132456";
         boolean active = true;
         OffsetDateTime dateTime = OffsetDateTime.now();
-        Role role = FakeRoleFactory.fakeRole();
-        Set<Role> roles = FakeRoleFactory.fakeRoleSet(role);
-        CallPlan callPlan = FakeCallPlanFactory.fakeCallPlan();
+        Role role = RoleFactory.fakeRole();
+        Set<Role> roles = RoleFactory.fakeRoleSet(role);
+        CallPlan callPlan = CallPlanFactory.fakeCallPlan();
 
         User user = new User()
             .setId(id)
@@ -168,5 +169,15 @@ public class UserTest {
                 .isAnnotationPresent(ManyToOne.class);
 
         assertThat(hasAnnotation).isTrue();
+    }
+
+    @Test
+    public void password_mustHaveMinAnnotationConfigured() throws NoSuchFieldException {
+        Size size = User.class
+                .getDeclaredField("password")
+                .getAnnotation(Size.class);
+
+        assertThat(size).isNotNull();
+        assertThat(size.min()).isEqualTo(8);
     }
 }

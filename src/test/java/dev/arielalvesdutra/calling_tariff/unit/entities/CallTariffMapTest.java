@@ -6,10 +6,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -26,8 +25,10 @@ public class CallTariffMapTest {
         DDD origin = new DDD();
         DDD destination = new DDD();
         BigDecimal pricePerMinute = new BigDecimal("2.00");
+        UUID uuid = UUID.randomUUID();
 
         CallTariffMap callTariffMap = new CallTariffMap()
+                .setUuid(uuid)
                 .setOrigin(origin)
                 .setDestination(destination)
                 .setPricePerMinute(pricePerMinute);
@@ -35,6 +36,7 @@ public class CallTariffMapTest {
         assertThat(callTariffMap.getOrigin()).isEqualTo(origin);
         assertThat(callTariffMap.getDestination()).isEqualTo(destination);
         assertThat(callTariffMap.getPricePerMinute()).isEqualTo(pricePerMinute);
+        assertThat(callTariffMap.getUuid()).isEqualTo(uuid);
     }
 
     @Test
@@ -43,13 +45,13 @@ public class CallTariffMapTest {
     }
 
     @Test
-    public void originAndDestination_mustHaveIdAnnotation() throws NoSuchFieldException {
+    public void originAndDestination_mustHaveMapsIdAnnotation() throws NoSuchFieldException {
         boolean originHasAnnotation = CallTariffMap.class
                 .getDeclaredField("origin")
-                .isAnnotationPresent(Id.class);
+                .isAnnotationPresent(MapsId.class);
         boolean destinationHasAnnotation = CallTariffMap.class
                 .getDeclaredField("destination")
-                .isAnnotationPresent(Id.class);
+                .isAnnotationPresent(MapsId.class);
 
         assertThat(originHasAnnotation).isTrue();
         assertThat(destinationHasAnnotation).isTrue();
@@ -63,10 +65,11 @@ public class CallTariffMapTest {
         CallTariffMap callTariffMap1 = new CallTariffMap()
                 .setOrigin(origin)
                 .setDestination(destination);
+        ;
         CallTariffMap callTariffMap2 = new CallTariffMap()
                 .setOrigin(origin)
                 .setDestination(destination);
-
+;
         assertThat(callTariffMap1).isEqualTo(callTariffMap2);
     }
 
@@ -78,5 +81,23 @@ public class CallTariffMapTest {
 
         assertThat(column).isNotNull();
         assertThat(column.nullable()).isEqualTo(false);
+    }
+
+    @Test
+    public void origin_mustHaveManyToOneAnnotation() throws NoSuchFieldException {
+        boolean hasAnnotation = CallTariffMap.class
+                .getDeclaredField("origin")
+                .isAnnotationPresent(ManyToOne.class);
+
+        assertThat(hasAnnotation).isTrue();
+    }
+
+    @Test
+    public void destination_mustHaveManyToOneAnnotation() throws NoSuchFieldException {
+        boolean hasAnnotation = CallTariffMap.class
+                .getDeclaredField("destination")
+                .isAnnotationPresent(ManyToOne.class);
+
+        assertThat(hasAnnotation).isTrue();
     }
 }

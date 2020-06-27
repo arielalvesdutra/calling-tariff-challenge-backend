@@ -2,7 +2,7 @@ package dev.arielalvesdutra.calling_tariff.unit.entities;
 
 import dev.arielalvesdutra.calling_tariff.entities.Historic;
 import dev.arielalvesdutra.calling_tariff.entities.User;
-import dev.arielalvesdutra.calling_tariff.fakes.factories.entities.FakeUserFactory;
+import dev.arielalvesdutra.calling_tariff.fakes.factories.entities.UserFactory;
 import org.junit.Test;
 
 import javax.persistence.*;
@@ -22,8 +22,8 @@ public class HistoricTest {
     public void gettersAndSetters_shouldWork() {
         Long id = 1L;
         UUID uuid = UUID.randomUUID();
-        User author = FakeUserFactory.fakeUser();
-        User client = FakeUserFactory.fakeUser();
+        User author = UserFactory.fakeUser();
+        User client = UserFactory.fakeUser();
         String description = "User updated his information.";
         OffsetDateTime dateTime = OffsetDateTime.now();
 
@@ -99,8 +99,8 @@ public class HistoricTest {
     @Test
     public void equals_shouldBeByIdAndClientAndAuthorAndDescriptionAndCreatedAt() {
         Long id = 1L;
-        User author = FakeUserFactory.fakeUser();
-        User client = FakeUserFactory.fakeUser();
+        User author = UserFactory.fakeUser();
+        User client = UserFactory.fakeUser();
         String description = "User updated his information.";
         OffsetDateTime dateTime = OffsetDateTime.now();
 

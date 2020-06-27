@@ -2,7 +2,7 @@ package dev.arielalvesdutra.calling_tariff.unit.entities;
 
 import dev.arielalvesdutra.calling_tariff.entities.CallRecord;
 import dev.arielalvesdutra.calling_tariff.entities.User;
-import dev.arielalvesdutra.calling_tariff.fakes.factories.entities.FakeUserFactory;
+import dev.arielalvesdutra.calling_tariff.fakes.factories.entities.UserFactory;
 import org.junit.Test;
 
 import javax.persistence.*;
@@ -21,7 +21,7 @@ public class CallRecordTest {
     @Test
     public void gettersAndSetters_shouldWork() {
         Long id = 1L;
-        User client = FakeUserFactory.fakeUser();
+        User client = UserFactory.fakeUser();
         Integer minutes = 32;
         BigDecimal price = new BigDecimal("22.10");
         OffsetDateTime dateTime = OffsetDateTime.now();

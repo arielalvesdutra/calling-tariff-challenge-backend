@@ -2,7 +2,7 @@ package dev.arielalvesdutra.calling_tariff.unit.entities;
 
 import dev.arielalvesdutra.calling_tariff.entities.DDD;
 import dev.arielalvesdutra.calling_tariff.entities.State;
-import dev.arielalvesdutra.calling_tariff.fakes.factories.entities.FakeStateFactory;
+import dev.arielalvesdutra.calling_tariff.fakes.factories.entities.StateFactory;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -23,7 +23,7 @@ public class DDDTest {
     public void settersAndGetters_shouldWork() {
         Long id = 1L;
         Integer code = 51;
-        State state = FakeStateFactory.fakeState();
+        State state = StateFactory.fakeState();
 
         DDD ddd = new DDD()
                 .setId(id)
