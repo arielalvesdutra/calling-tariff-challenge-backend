@@ -8,10 +8,13 @@ import lombok.experimental.Accessors;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.Size;
 import java.time.OffsetDateTime;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
+
+import static dev.arielalvesdutra.calling_tariff.helpers.ObjectHelper.isEmpty;
 
 @Getter
 @Setter
@@ -30,8 +33,9 @@ public class User {
     @Column(unique = true, nullable = false)
     private String email;
     @Column(nullable = false)
+    @Size(min = 8)
     private String password;
-    private boolean active = false;
+    private boolean active = true;
     private OffsetDateTime createdAt = OffsetDateTime.now();
     private OffsetDateTime updatedAt = OffsetDateTime.now();
     @ManyToMany
@@ -41,4 +45,8 @@ public class User {
     private Set<Role> roles = new HashSet<>();
     @ManyToOne
     private CallPlan callPlan;
+
+    public boolean hasACallPlan() {
+        return !isEmpty(this.getCallPlan());
+    }
 }

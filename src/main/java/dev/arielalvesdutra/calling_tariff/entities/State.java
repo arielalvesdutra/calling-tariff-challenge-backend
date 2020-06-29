@@ -3,6 +3,7 @@ package dev.arielalvesdutra.calling_tariff.entities;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 import lombok.experimental.Accessors;
 
 import javax.persistence.*;
@@ -14,6 +15,7 @@ import javax.persistence.*;
 @Setter
 @Accessors(chain = true)
 @Entity
+@ToString
 @EqualsAndHashCode(of = "abbreviation")
 public class State {
     @Id

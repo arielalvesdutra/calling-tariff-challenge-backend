@@ -3,6 +3,7 @@ package dev.arielalvesdutra.calling_tariff.entities;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 import lombok.experimental.Accessors;
 
 import javax.persistence.*;
@@ -18,15 +19,24 @@ import java.time.OffsetDateTime;
 @Accessors(chain = true)
 @Entity
 @EqualsAndHashCode(of = "id")
+@ToString
 public class CallRecord {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Column(nullable = false)
     private BigDecimal price = new BigDecimal("0.00");
+
+    /**
+     * Correspond to minutes of call duration.
+     */
     @Column(nullable = false)
     private Integer minutes;
+
     @ManyToOne
     private User client;
+
     private OffsetDateTime createdAt = OffsetDateTime.now();
 }

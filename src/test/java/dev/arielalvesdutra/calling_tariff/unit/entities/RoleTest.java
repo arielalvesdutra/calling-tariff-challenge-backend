@@ -2,7 +2,7 @@ package dev.arielalvesdutra.calling_tariff.unit.entities;
 
 import dev.arielalvesdutra.calling_tariff.entities.Role;
 import dev.arielalvesdutra.calling_tariff.entities.User;
-import dev.arielalvesdutra.calling_tariff.fakes.factories.entities.FakeUserFactory;
+import dev.arielalvesdutra.calling_tariff.fakes.factories.entities.UserFactory;
 import org.junit.Test;
 
 import javax.persistence.*;
@@ -29,8 +29,8 @@ public class RoleTest {
         String description = "Support Anaylist";
         String code = SUPPORT_ROLE;
         OffsetDateTime dateTime = OffsetDateTime.now();
-        User user = FakeUserFactory.fakeUser();
-        Set<User> userSet  = FakeUserFactory.fakeUserSet(user);
+        User user = UserFactory.fakeUser();
+        Set<User> userSet  = UserFactory.fakeUserSet(user);
 
         Role role = new Role()
                 .setId(id)

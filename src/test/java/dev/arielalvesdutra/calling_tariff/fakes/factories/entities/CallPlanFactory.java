@@ -7,8 +7,27 @@ import java.math.BigDecimal;
 /**
  * Factory to create fake objects for testing.
  */
-public class FakeCallPlanFactory {
+public class CallPlanFactory {
 
+    /**
+     * Create a fake CallPlan without id attribute fulfilled.
+     *
+     * @return
+     */
+    public static CallPlan validCallPlanWithoutId() {
+        return new CallPlan()
+                .setName("FaleMais 33")
+                .setDescription("Fale mais com 33 minutos")
+                .setMinutes(33)
+                .setPrice(new BigDecimal("33.00"))
+                .setVisible(true);
+    }
+
+    /**
+     * Create a fake CallPlan.
+     *
+     * @return
+     */
     public static CallPlan fakeCallPlan() {
         return new CallPlan()
                 .setId(1L)
