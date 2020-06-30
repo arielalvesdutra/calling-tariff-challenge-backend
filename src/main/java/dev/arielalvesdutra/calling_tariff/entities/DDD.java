@@ -1,5 +1,6 @@
 package dev.arielalvesdutra.calling_tariff.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -24,6 +25,7 @@ public class DDD implements Serializable {
     private Long id;
     @Column(nullable = false)
     private Integer code;
+    @JsonIgnore
     @ManyToOne
     private State state;
 }

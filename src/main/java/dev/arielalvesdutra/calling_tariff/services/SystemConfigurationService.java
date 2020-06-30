@@ -61,4 +61,14 @@ public class SystemConfigurationService {
     public SystemConfiguration findDefaultCallMinuteCharge() {
         return this.findByCode("default_call_minute_charge");
     }
+
+    /**
+     * Find configuration that is persisted after the installation of
+     * the system.
+     *
+     * @return
+     */
+    public SystemConfiguration findInstallation() {
+        return this.findByCode("installation");
+    }
 }

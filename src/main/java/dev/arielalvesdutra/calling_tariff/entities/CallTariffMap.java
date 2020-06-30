@@ -1,5 +1,6 @@
 package dev.arielalvesdutra.calling_tariff.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import dev.arielalvesdutra.calling_tariff.entities.pk.CallTariffMapId;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -33,11 +34,13 @@ public class CallTariffMap implements Serializable {
     @MapsId("originId")
     @ManyToOne
     @JoinColumn(name = "origin_id", referencedColumnName = "id")
+    @JsonIgnore
     private DDD origin;
 
     @MapsId("destinationId")
     @ManyToOne
     @JoinColumn(name = "destination_id", referencedColumnName = "id")
+    @JsonIgnore
     private DDD destination;
 
     @Column(nullable = false)
