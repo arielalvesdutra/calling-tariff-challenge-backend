@@ -1,15 +1,18 @@
 package dev.arielalvesdutra.calling_tariff.services;
 
 
+import dev.arielalvesdutra.calling_tariff.controllers.dtos.CalculateCallRecordRequestDTO;
 import dev.arielalvesdutra.calling_tariff.entities.*;
 import dev.arielalvesdutra.calling_tariff.exceptions.CallingTariffException;
 import dev.arielalvesdutra.calling_tariff.repositories.CallRecordRepository;
 import dev.arielalvesdutra.calling_tariff.services.dtos.CalculateCallRecordDTO;
 import dev.arielalvesdutra.calling_tariff.services.dtos.CreateCallRecordDTO;
+import dev.arielalvesdutra.calling_tariff.services.dtos.UpdateUserCallPlanDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
+import javax.transaction.Transactional;
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -21,6 +24,11 @@ import static dev.arielalvesdutra.calling_tariff.helpers.ObjectHelper.isEmpty;
  */
 @Service
 public class CallRecordService {
+
+    private final String USER_RUNNER_EMAIL = "runner@teste.com";
+
+    @Autowired
+    private UserService userService;
 
     @Autowired
     private DDDService dddService;
@@ -38,12 +46,14 @@ public class CallRecordService {
             CallRecordRepository callRecordRepository,
             DDDService dddService,
             SystemConfigurationService systemConfigurationService,
-            CallTariffMapService callTariffMapService) {
+            CallTariffMapService callTariffMapService,
+            UserService userService) {
 
         this.callRecordRepository = callRecordRepository;
         this.dddService = dddService;
         this.systemConfigurationService = systemConfigurationService;
         this.callTariffMapService = callTariffMapService;
+        this.userService = userService;
     }
 
     /**
@@ -100,6 +110,41 @@ public class CallRecordService {
                 .setMinutes(durationInMinutes)
                 .setPrice(calculatedPrice);
     }
+
+    /**
+     * Temporary method.
+     *
+     *
+     * @param dto DTO received from controller request
+     * @return
+     */
+    public CalculateCallRecordDTO fillCalculateCallRecordDTO(CalculateCallRecordRequestDTO dto) {
+        User user = userService.findByEmail(USER_RUNNER_EMAIL);
+        UpdateUserCallPlanDTO updateUserCallPlanDTO = new UpdateUserCallPlanDTO()
+                .setUserUuid(user.getUuid());
+
+        if (!isEmpty(dto.getCallPlanUuid())) {
+            updateUserCallPlanDTO.setCallPlanUuid(dto.getCallPlanUuid());
+        }
+
+        userService.updateUserCallPlan(updateUserCallPlanDTO);
+
+        CalculateCallRecordDTO calculateDto = new CalculateCallRecordDTO()
+                .setClient(user)
+                .setDuration(dto.getDuration());
+
+        if (!isEmpty(dto.getOriginCode()) && !isEmpty(dto.getDestinationCode())) {
+            DDD origin = dddService.findFirstByCode(dto.getOriginCode());
+            DDD destination = dddService.findFirstByCode(dto.getDestinationCode());
+
+            calculateDto
+                    .setOrigin(origin)
+                    .setDestination(destination);
+        }
+
+        return calculateDto;
+    }
+
 
     /**
      * Calculate the price of a call.
@@ -274,5 +319,10 @@ public class CallRecordService {
         } catch (EntityNotFoundException e) {
             throw new CallingTariffException("Default call charge must be configured!");
         }
+    }
+
+    @Transactional
+    public void deleteAll() {
+        callRecordRepository.deleteAll();
     }
 }

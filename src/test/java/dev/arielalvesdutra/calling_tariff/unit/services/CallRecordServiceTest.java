@@ -2,10 +2,7 @@ package dev.arielalvesdutra.calling_tariff.unit.services;
 
 import dev.arielalvesdutra.calling_tariff.exceptions.CallingTariffException;
 import dev.arielalvesdutra.calling_tariff.repositories.CallRecordRepository;
-import dev.arielalvesdutra.calling_tariff.services.CallRecordService;
-import dev.arielalvesdutra.calling_tariff.services.CallTariffMapService;
-import dev.arielalvesdutra.calling_tariff.services.DDDService;
-import dev.arielalvesdutra.calling_tariff.services.SystemConfigurationService;
+import dev.arielalvesdutra.calling_tariff.services.*;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -27,6 +24,8 @@ public class CallRecordServiceTest {
     private SystemConfigurationService mockSystemConfigurationService;
     @Mock
     private CallTariffMapService mockCallTariffMapService;
+    @Mock
+    private UserService mockUserService;
 
     private CallRecordService callRecordService;
 
@@ -36,7 +35,8 @@ public class CallRecordServiceTest {
                 mockCallRecordRepository,
                 mockDddService,
                 mockSystemConfigurationService,
-                mockCallTariffMapService);
+                mockCallTariffMapService,
+                mockUserService);
     }
 
     @Test
