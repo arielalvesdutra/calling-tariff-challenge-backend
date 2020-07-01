@@ -7,6 +7,7 @@ Projeto desenvolvido com Java 8, Spring Boot 2.3, Hibernate, Maven, MySQL, H2, L
 | URL  | Tipo |  Descrição |
 | ---- | ---- |---- |
 | /ddd  | GET  | Retorna os DDDs cadastrados.
+
 | /call-plans  | GET  | Retorna os planos de ligação cadastrados.
 | /call-tariff-maps  | GET  | Retorna o mapa de tarifa por origem e destino de ligação.
 | /call-records/calculate | POST  | Simula o cálculo de uma ligação.
@@ -74,9 +75,10 @@ A aplicação utiliza o banco de dados MySQL.
 
 **2 - Compilação e execução**
 
-A primeira forma de executar a aplicação, é utilizando o plugin do spring boot. Basta executar nas pasta raiz do projeto o seguinte comnado:
+A primeira forma de executar a aplicação, é utilizando o plugin do spring boot. Basta executar nas pasta raiz do projeto os seguintes comandos:
 
 ```shell script
+mvn clean verify
 mvn spring-boot:run
 ```
 

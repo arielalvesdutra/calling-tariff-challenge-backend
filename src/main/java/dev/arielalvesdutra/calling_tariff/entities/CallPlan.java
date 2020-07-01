@@ -5,6 +5,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -23,6 +24,8 @@ public class CallPlan {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(name = "uuid", columnDefinition = "VARCHAR(255)")
+    @Type(type="org.hibernate.type.UUIDCharType")
     private UUID uuid = UUID.randomUUID();
     @Column(nullable = false)
     private String name;

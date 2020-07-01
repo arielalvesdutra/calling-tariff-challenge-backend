@@ -4,7 +4,9 @@ package dev.arielalvesdutra.calling_tariff.entities;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 import lombok.experimental.Accessors;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -21,11 +23,14 @@ import static dev.arielalvesdutra.calling_tariff.helpers.ObjectHelper.isEmpty;
 @Accessors(chain = true)
 @Entity
 @EqualsAndHashCode(of = "email")
+@ToString
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(name = "uuid", columnDefinition = "VARCHAR(255)")
+    @Type(type="org.hibernate.type.UUIDCharType")
     private UUID uuid = UUID.randomUUID();
     @Column(nullable = false)
     private String name;

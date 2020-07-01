@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.Accessors;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -28,7 +29,8 @@ public class CallTariffMap implements Serializable {
 
     @EmbeddedId
     private CallTariffMapId id = new CallTariffMapId();
-
+    @Type(type="org.hibernate.type.UUIDCharType")
+    @Column(name = "uuid", columnDefinition = "VARCHAR(255)")
     private UUID uuid = UUID.randomUUID();
 
     @MapsId("originId")
