@@ -7,7 +7,6 @@ Projeto desenvolvido com Java 8, Spring Boot 2.3, Hibernate, Maven, MySQL, H2, L
 | URL  | Tipo |  Descrição |
 | ---- | ---- |---- |
 | /ddd  | GET  | Retorna os DDDs cadastrados.
-
 | /call-plans  | GET  | Retorna os planos de ligação cadastrados.
 | /call-tariff-maps  | GET  | Retorna o mapa de tarifa por origem e destino de ligação.
 | /call-records/calculate | POST  | Simula o cálculo de uma ligação.
