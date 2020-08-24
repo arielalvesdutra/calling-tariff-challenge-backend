@@ -1,19 +1,20 @@
 # Calling Tariff Challenge
 
-Projeto desenvolvido com Java 8, Spring Boot 2.3, Hibernate, Maven, MySQL, H2, Lombok e TDD.
+Project made with Java 8, Spring Boot 2.3, Hibernate, Maven, MySQL, H2, Lombok and TDD.
 
-## Principais URLs
+## Main URLs
 
-| URL  | Tipo |  Descrição |
+| URL  | Tipo |  Description |
 | ---- | ---- |---- |
-| /ddd  | GET  | Retorna os DDDs cadastrados.
-| /call-plans  | GET  | Retorna os planos de ligação cadastrados.
-| /call-tariff-maps  | GET  | Retorna o mapa de tarifa por origem e destino de ligação.
-| /call-records/calculate | POST  | Simula o cálculo de uma ligação.
+| /ddd  | GET  | Return all DDDs.
+| /call-plans  | GET  | Return all call plans.
+| /call-tariff-maps  | GET  | Returns all tariff maps by origin and destination of a call
+| /call-records/calculate | POST  | Simulates the calculation of a call.
+
 
 ### /call-records/calculate - POST
 
-Exemplo de JSON para realizar a requisição:
+Example of a request body:
 
 ```json
 {
@@ -24,64 +25,63 @@ Exemplo de JSON para realizar a requisição:
 }
 ```
 
-Descrição dos campos:
+Description of the fields:
 
-| Campo  | Obrigatório |  Descrição |
+| Field  | Mandatory |  Description |
 | ---- | ---- |---- |
-| duration  | Sim  | Duração em minutos da ligação
-| originCode  | Não  | DDD de origem
-| destinationCode  | Não  | DDD de destino
-| callPlanUuid  | Não  | Uuid do plano para simular a consulta
+| duration  | Yes  | Duration in minutes of the call
+| originCode  | No  | DDD of the origin
+| destinationCode  | No  | DDD of the destiny
+| callPlanUuid  | No  | Uuid of the plan
 
-## Estrutura
+## Structure
 
-Descrição breve da estutura atual do projeto:
+Brief description of the current structure of the project:
 
 - `controllers`: controllers
-- `services`: são reutilizem ao longo do projeto. Fazem comunicação com controllers, services, entidades e repositories. Envolvem questões do domínio;
+- `services`: they are reusable in the project . They do communication with controllers, services, entities and repositories. Related with the domain;
 - `repositories`: repositories;
-- `entities`: entidades;
-- `helpers`: classes e métodos que podem ser reutilizados no projeto e que não envolvem questões do domínio;
-- `factories`: solução adotada para fabricar entidades. Não é uma solução permanente;
-- `configs`: configurações do sistema, como CORS, Spring Security e inserção de dados essenciais;
-- `strategies`: ainda não utilizado, MAS, deverá ser utilizado para tarefas como cálculos.
+- `entities`: entities;
+- `helpers`: classes and methods that can be reused in the project and that aren't related with the domain;
+- `factories`: adopted solution to create entities. It's not a permanent solution;
+- `configs`: system configurations, like CORS, Spring Security and insertion of essential data;
+- `strategies`: not used yet, but will be used to tasks like calculations.
 
-## Testes
+## Tests
 
-Os serviços e entidadas da aplicação foram desenvolvidos com TDD. Apenas a controller Home e a controller CallRecord foram desenvolvidas com TDD.
+The services and entities of the application were developed with TDD. Only HomeController and CallRecordController were developed with TDD.
 
-Foram criados Testes de Unidade e Testes de Integração.
 
-Para executar Testes de Unidade, basta executar:
+To run the Unit Tests, execute the following command:
 
 ```shell script
 mvn clean test
 ```
 
-Para executar Testes de Unidade e Testes de Integração, basta executar:
+To run the Unit Tests and Integration Tests, execute the following command:
 
 ```shell script
 mvn clean verify
 ```
 
-## Instalação
+## Installation
 
-**1 - Base de dados**
+**1 - Database**
 
-A aplicação utiliza o banco de dados MySQL.
+This application uses MySQL database.
 
-É possível configurar as informações da base de dados no arquivo `application.properties` ou inserindo os dados da base de dados na execução do projeto com `-D` via terminal.
+It's possible to configure the database information in the file `application.properties` or by inserting the database data when executing the project in the terminal with `-D` prefix.
 
-**2 - Compilação e execução**
+**2 - Compilation and execution**
 
-A primeira forma de executar a aplicação, é utilizando o plugin do spring boot. Basta executar nas pasta raiz do projeto os seguintes comandos:
+The first way to run the application is by using the `Spring Boot` plugin. In the project root folder, execute the following commands:
 
 ```shell script
 mvn clean verify
 mvn spring-boot:run
 ```
+Another way to run the project, is by compiling and then running it. The commands are:
 
-Outra forma de executar o projeto, é compilar ele e depois executar. Os comandos são:
 ```shell script
 mvn clean verify
 java -jar target/calling_tariff-0.1.0-SNAPSHOT.jar
